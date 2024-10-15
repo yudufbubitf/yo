@@ -1,0 +1,13 @@
+from flask import Flask, request, jsonify
+import requests
+
+app = Flask(__name__)
+
+@app.route('/proxy', methods=['GET', 'POST'])
+def proxy():
+    url = request.args.get('url')
+    response = requests.get(url)
+    return jsonify(response.json())
+
+if __name__ == '__main__':
+    app.run(port=5000)
